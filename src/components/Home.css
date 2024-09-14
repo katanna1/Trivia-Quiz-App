@@ -1,0 +1,105 @@
+/* Home.css */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+.header {
+  display: flex;
+  justify-content: center; /* Centering the header content horizontally */
+  align-items: center;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+}
+
+.header .logo {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.login-register {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.login-register .login-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px; /* Space between buttons if needed */
+}
+
+.login-register .login-button:hover {
+  background-color: #45a049;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.main h1 {
+  font-size: 48px;
+  color: #333;
+}
+
+.main p {
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+.play-button {
+  background-color: #ff0000;
+  color: white;
+  font-size: 24px;
+  padding: 15px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.play-button:hover {
+  background-color: #e60000;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+}
+
+.footer-button {
+  background-color: #555;
+  color: white;
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.footer-button:hover {
+  background-color: #666;
+}
