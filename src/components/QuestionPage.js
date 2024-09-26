@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./QuestionPage.css";
+import Header from "./Header";
+import Footer from "./Footer";
 
 function QuestionPage() {
   const { state } = useLocation();
@@ -52,11 +54,7 @@ function QuestionPage() {
 
   return (
     <div className="question-page-container">
-      <header className="question-page-header">
-        <div className="logo" onClick={() => navigate("/")}>
-          <h1>LOGO</h1>
-        </div>
-      </header>
+      <Header />
 
       <main className="question-page-main">
         <button className="back-button" onClick={handleBackClick}>
@@ -82,17 +80,7 @@ function QuestionPage() {
         )}
       </main>
 
-      <footer className="question-page-footer">
-        <button className="footer-button" onClick={() => navigate("/languages")}>
-          Languages
-        </button>
-        <button className="footer-button" onClick={() => navigate("/support")}>
-          Support
-        </button>
-        <button className="footer-button" onClick={() => navigate("/contact")}>
-          Contact Us
-        </button>
-      </footer>
+      <Footer />
     </div>
   );
 }

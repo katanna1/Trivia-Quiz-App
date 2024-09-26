@@ -5,6 +5,7 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: #f4f4f4;
+  font-family: "Arial", sans-serif; /* Added a font family for better readability */
 }
 
 .choose-topic-header {
@@ -19,7 +20,7 @@
 .logo {
   cursor: pointer;
   color: white;
-  font-size: 24px;
+  font-size: 28px; /* Increased logo size */
   font-weight: bold;
 }
 
@@ -29,6 +30,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding: 20px; /* Added padding for main content */
 }
 
 .choose-topic-main h1 {
@@ -39,7 +41,7 @@
 
 .topic-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Improved min width for better tile sizing */
   gap: 20px;
   padding: 20px;
   max-width: 1200px;
@@ -47,19 +49,21 @@
 }
 
 .topic-box {
-  background-color: #ddd;
-  padding: 20px;
+  background-color: #fff; /* Changed background color for better contrast */
+  padding: 30px; /* Increased padding for a more spacious feel */
   text-align: center;
   border-radius: 10px;
   font-size: 18px;
   color: #333;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s; /* Added box-shadow for depth effect */
+  border: 1px solid #ddd; /* Added border */
 }
 
 .topic-box:hover {
-  background-color: #ccc;
-  transform: scale(1.05);
+  background-color: #f0f0f0; /* Lightened color on hover */
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Added shadow for depth */
 }
 
 .difficulty {
@@ -76,6 +80,12 @@
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid #ddd;
+  transition: border-color 0.3s; /* Transition for better user experience */
+}
+
+.difficulty select:focus {
+  border-color: #007bff; /* Change border color on focus */
+  outline: none; /* Remove default outline */
 }
 
 .choose-topic-footer {
@@ -95,8 +105,24 @@
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s; /* Transition effects */
 }
 
 .footer-button:hover {
   background-color: #666;
+  transform: scale(1.05); /* Slight scale on hover */
+}
+/* ChooseTopic.css */
+
+/* Add this CSS rule for search bar styling */
+.search-bar {
+  margin: 20px 0;
+}
+
+.search-bar input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 300px; /* Adjust width as needed */
 }

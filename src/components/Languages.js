@@ -1,8 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Languages.css";
+import Header from "./Header";
+import Footer from "./Footer";
 
-function Languages() {
+const Languages = () => {
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -10,14 +12,22 @@ function Languages() {
   };
 
   return (
-    <div className="footer-page">
-      <button className="back-button" onClick={handleBackClick}>
-        Back
-      </button>
-      <h1>Languages</h1>
-      <p>List of available languages will be shown here.</p>
+    <div className="languages-page">
+      <Header />
+      <div className="languages-content">
+        <h1 className="languages-title">Available Languages</h1>
+        <p className="languages-text">We currently support the following languages:</p>
+        <ul className="languages-list">
+          <li>English</li>
+          <li>Spanish</li>
+        </ul>
+        <button className="back-button" onClick={handleBackClick}>
+          &larr; Back
+        </button>
+      </div>
+      <Footer />
     </div>
   );
-}
+};
 
 export default Languages;

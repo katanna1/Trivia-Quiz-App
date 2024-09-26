@@ -7,19 +7,87 @@
   justify-content: center;
   min-height: 100vh;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: #bdeff5; /* Light blue background */
+}
+
+.contact-form {
+  background-color: #ffffff; /* White background for the form */
+  border-radius: 15px;
+  padding: 40px;
+  width: 90%; /* Responsive width */
+  max-width: 600px; /* Limit maximum width */
+  text-align: center;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+}
+
+.contact-form h1 {
+  font-size: 2.5rem; /* Larger font size for heading */
+  margin-bottom: 20px;
+  color: #333; /* Darker text color */
+  font-weight: 600; /* Slightly bolder */
+}
+
+.input-field,
+.message-box {
+  display: block;
+  width: 90%; /* Increased width for better use of space */
+  margin: 15px auto; /* Increased margin for better spacing */
+  padding: 12px; /* Increased padding for comfort */
+  border-radius: 8px; /* More rounded corners */
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.3s ease; /* Smooth transition for border */
+}
+
+.input-field:focus,
+.message-box:focus {
+  border-color: #8a2be2; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+}
+
+.message-box {
+  height: 150px; /* Height for the message box */
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #555; /* Slightly darker gray for better readability */
+  margin-top: 10px;
+  padding: 0 10px; /* Added padding for spacing */
+}
+
+.button-group {
+  display: flex;
+  justify-content: center; /* Center buttons horizontally */
+  flex-direction: column; /* Stack buttons vertically */
+  margin-top: 20px; /* Space above button group */
+}
+
+.send-button,
+.back-button {
+  background-color: #8a2be2; /* Purple button */
+  color: white;
+  padding: 12px 24px; /* Increased padding for a better click area */
+  border: none;
+  cursor: pointer;
+  border-radius: 8px; /* More rounded corners */
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  width: 100%; /* Full width for rectangular shape */
+  max-width: 200px; /* Limit max width for larger screens */
+  margin: 10px 0; /* Space between buttons */
+}
+
+.send-button:hover {
+  background-color: #6f1bb7; /* Darker shade of purple on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
 }
 
 .back-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  background-color: #ff5722; /* Color for the back button */
 }
 
 .back-button:hover {
-  background-color: #45a049;
+  background-color: #e64a19; /* Darker shade on hover */
+  transform: translateY(-2px); /* Slight lift effect on hover */
 }

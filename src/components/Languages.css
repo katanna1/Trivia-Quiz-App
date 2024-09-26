@@ -1,38 +1,69 @@
-/* Languages.css */
-
-.footer-page {
+.languages-page {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
-  padding: 20px;
-  background-color: #f4f4f4;
+}
+
+.languages-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centering content horizontally */
+  justify-content: center; /* Centering content vertically */
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f9f9f9; /* Light background for content section */
 }
 
 .back-button {
-  background-color: #4caf50;
+  background-color: #007bff;
   color: white;
-  padding: 8px 16px;
+  padding: 15px 30px; /* Larger padding for a rectangular shape */
   border: none;
   cursor: pointer;
-  border-radius: 20px;
-  font-size: 14px;
-  margin-bottom: 20px;
-  transition: background-color 0.3s, transform 0.3s;
+  border-radius: 5px;
+  margin-top: 20px; /* Added margin on top for spacing */
+  font-size: 18px; /* Increased font size */
+  transition: background-color 0.3s ease;
+  width: 200px; /* Fixed width for consistency */
 }
 
 .back-button:hover {
-  background-color: #45a049;
-  transform: scale(1.05);
+  background-color: #0056b3;
 }
 
-h1 {
+.languages-title {
   font-size: 36px;
   color: #333;
+  margin-bottom: 20px;
 }
 
-p {
+.languages-text {
   font-size: 18px;
   color: #666;
+  margin-bottom: 30px;
+}
+
+.languages-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.languages-list li {
+  font-size: 20px;
+  color: #333;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.languages-list li:last-child {
+  border-bottom: none; /* Remove the last border */
+}
+
+/* Ensure footer stays at the bottom */
+.footer-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }

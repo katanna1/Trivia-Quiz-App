@@ -1,87 +1,100 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import "./QuestionPage.css";
+import { useNavigate } from "react-router-dom";
+import "./ChooseTopic.css"; // Ensure your CSS file path is correct
+import Header from "./Header";
+import Footer from "./Footer";
 
-function QuestionPage() {
-  const { state } = useLocation();
+function ChooseTopic() {
   const navigate = useNavigate();
-  const [questions, setQuestions] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filteredCategories, setFilteredCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  const { topicId, difficulty } = state || { topicId: 9, difficulty: "easy" }; // Default values if state is undefined
+  const [difficulty, setDifficulty] = useState("easy"); // Default difficulty
+  const [searchTerm, setSearchTerm] = useState(""); // Search term state
 
   useEffect(() => {
-    const fetchQuestions = async () => {
+    const fetchCategories = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch(`https://opentdb.com/api.php?amount=10&category=<CATEGORY_ID>&difficulty=<DIFFICULTY>&type=multiple
-`);
+        const response = await fetch("https://opentdb.com/api_category.php");
         const data = await response.json();
-        if (data.results) {
-          setQuestions(data.results);
+
+        if (data.trivia_categories) {
+          setCategories(data.trivia_categories);
+          setFilteredCategories(data.trivia_categories); // Initialize filtered categories
         } else {
-          throw new Error("No questions found");
+          throw new Error("No categories found");
         }
       } catch (error) {
-        setError("Failed to fetch questions. Please try again.");
-        console.error("Failed to fetch questions", error);
+        setError("Failed to fetch categories. Please try again.");
+        console.error("Failed to fetch categories", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
-    fetchQuestions();
-  }, [topicId, difficulty]);
 
-  const handleBackClick = () => {
-    navigate("/choose-topic");
+    fetchCategories();
+  }, []);
+
+  const handleDifficultyChange = (event) => {
+    setDifficulty(event.target.value);
+  };
+
+  const handleTopicSelect = (topicId) => {
+    navigate("/question-page", {
+      state: { topicId, difficulty },
+    });
+  };
+
+  // Handle search input change
+  const handleSearchChange = (event) => {
+    const term = event.target.value.toLowerCase();
+    setSearchTerm(term);
+    const filtered = categories.filter((category) => decodeURIComponent(category.name).toLowerCase().includes(term));
+    setFilteredCategories(filtered);
   };
 
   return (
-    <div className="question-page-container">
-      <header className="question-page-header">
-        <div className="logo" onClick={() => navigate("/")}>
-          <h1>LOGO</h1>
-        </div>
-      </header>
+    <div className="choose-topic-container">
+      <Header />
+      <main className="choose-topic-main">
+        <h1>Choose a Topic</h1>
 
-      <main className="question-page-main">
-        <button className="back-button" onClick={handleBackClick}>
-          Back
-        </button>
-        <h1>Questions</h1>
-        {loading && <p>Loading...</p>}
+        {/* Difficulty Selector */}
+        <div className="difficulty">
+          <label htmlFor="difficulty-select">Select Difficulty:</label>
+          <select id="difficulty-select" value={difficulty} onChange={handleDifficultyChange}>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+
+        {/* Search Input */}
+        <div className="search-bar">
+          <input type="text" placeholder="Search topics..." value={searchTerm} onChange={handleSearchChange} />
+        </div>
+
+        {/* Topic Grid */}
+        {loading && <p>Loading categories...</p>}
         {error && <p>{error}</p>}
-        {!loading && !error && questions.length > 0 ? (
-          questions.map((question, index) => (
-            <div key={index} className="question-card">
-              <h2>{decodeURIComponent(question.question)}</h2>
-              <ul>
-                {question.incorrect_answers.map((answer, idx) => (
-                  <li key={idx}>{decodeURIComponent(answer)}</li>
-                ))}
-                <li>{decodeURIComponent(question.correct_answer)}</li>
-              </ul>
-            </div>
-          ))
+        {!loading && !error && filteredCategories.length > 0 ? (
+          <div className="topic-grid">
+            {filteredCategories.map((category) => (
+              <div key={category.id} className="topic-box" onClick={() => handleTopicSelect(category.id)}>
+                {decodeURIComponent(category.name)}
+              </div>
+            ))}
+          </div>
         ) : (
-          <p>No questions available.</p>
+          <p>No categories available.</p>
         )}
       </main>
-
-      <footer className="question-page-footer">
-        <button className="footer-button" onClick={() => navigate("/languages")}>
-          Languages
-        </button>
-        <button className="footer-button" onClick={() => navigate("/support")}>
-          Support
-        </button>
-        <button className="footer-button" onClick={() => navigate("/contact")}>
-          Contact Us
-        </button>
-      </footer>
+      <Footer />
     </div>
   );
 }
 
-export default QuestionPage;
+export default ChooseTopic;

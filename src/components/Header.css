@@ -1,0 +1,93 @@
+:root {
+  --header-height: 60px; /* Set a fixed height for the header */
+  --background-color: #333;
+  --text-color: white;
+  --button-background: #4caf50;
+  --button-hover: #45a049;
+  --button-focus: rgba(0, 123, 255, 0.5);
+  --button-text-color: #000;
+  --button-radius: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px; /* Side padding for header */
+  height: var(--header-height);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  position: fixed; /* Keep the header fixed at the top */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure it stays above other content */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
+}
+
+.icon {
+  /* Future icon styles */
+  width: 40px; /* Placeholder width for icon */
+  height: 40px; /* Placeholder height for icon */
+  background-color: transparent; /* Future icon background */
+}
+
+.know-it-all {
+  font-size: 28px; /* Increase font size for visibility */
+  font-weight: bold; /* Bold for emphasis */
+  color: #ffffff; /* Ensure text is white for visibility */
+  cursor: pointer; /* Pointer cursor on hover */
+  text-align: center; /* Center the text */
+  flex-grow: 1; /* Take up available space for centering */
+  display: flex; /* Use flexbox to center text */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.login-register {
+  display: flex;
+  gap: 10px;
+}
+
+.login-button,
+.register-button {
+  border-radius: var(--button-radius);
+  color: var(--button-text-color);
+  padding: 10px 20px;
+  font-size: 18px; /* Font size for better readability */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border: none; /* Remove default border */
+}
+
+.login-button {
+  background-color: var(--button-background);
+}
+
+.login-button:hover {
+  background-color: var(--button-hover);
+}
+
+.login-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--button-focus);
+}
+
+.register-button {
+  background-color: #007bff; /* Different color for the register button */
+  color: white;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+}
+
+.register-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--button-focus);
+}
+
+/* Add some top margin to the body to prevent overlap with the fixed header */
+body {
+  margin-top: var(--header-height); /* Ensure content is below the fixed header */
+}
