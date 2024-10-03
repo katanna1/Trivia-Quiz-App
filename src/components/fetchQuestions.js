@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-const FetchQuestions = ({ topicId, difficulty }) => {
+const FetchQuestions = () => {
+  const { topicId, difficulty } = useParams(); // Get topicId and difficulty from URL
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Function to fetch questions from the API
   const fetchQuestions = async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`https://opentdb.com/api.php?amount=10&category=${topicId}&difficulty=${difficulty}&type=multiple`);
+      // Log the URL being requested for debugging
+      const url = `https://opentdb.com/api.php?amount=10&category=${topicId}&difficulty=${difficulty}&type=multiple`;
+      console.log(`Fetching questions from: ${url}`);
 
-      // Log the URL and response status for debugging
-      console.log(`Request URL: ${response.url}`);
+      const response = await fetch(url);
+
+      // Log the response status for debugging
       console.log(`Response Status: ${response.status}`);
 
       if (!response.ok) {
@@ -22,10 +26,11 @@ const FetchQuestions = ({ topicId, difficulty }) => {
 
       const data = await response.json();
 
-      // Log the data for debugging
-      console.log("API Response:", data);
+      // Log the raw data for debugging
+      console.log("API Response Data:", data);
 
-      if (data.results) {
+      // Ensure that the results property exists and is an array
+      if (data.results && Array.isArray(data.results) && data.results.length > 0) {
         setQuestions(data.results);
       } else {
         throw new Error("No questions found in the API response");
@@ -33,11 +38,11 @@ const FetchQuestions = ({ topicId, difficulty }) => {
     } catch (error) {
       setError(`Failed to fetch questions: ${error.message}`);
       console.error("Error fetching questions:", error);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
-  // Use useEffect to fetch questions on component mount or when topicId/difficulty changes
   useEffect(() => {
     fetchQuestions();
   }, [topicId, difficulty]);
