@@ -74,10 +74,13 @@ const Random = () => {
   }, [timerActive, progress]);
 
   const handleAnswerClick = (answer) => {
-    setSelectedAnswer(answer);
-    setIsCorrect(answer === question.correctAnswer);
-    setShowCorrectAnswer(true); // Show correct answer after user selects an answer
-    setTimerActive(true); // Start the timer after the answer is selected
+    // Only set the selected answer if no answer has been chosen yet
+    if (selectedAnswer === null) {
+      setSelectedAnswer(answer);
+      setIsCorrect(answer === question.correctAnswer);
+      setShowCorrectAnswer(true); // Show correct answer after user selects an answer
+      setTimerActive(true); // Start the timer after the answer is selected
+    }
   };
 
   const handleNextQuestionClick = () => {
@@ -112,11 +115,7 @@ const Random = () => {
             )}
 
             {/* Display feedback after an answer is selected */}
-            {selectedAnswer && (
-              <p className={isCorrect ? "correct-text" : "incorrect-text"}>
-                {isCorrect ? "Correct!" : `Incorrect! The correct answer is: ${question.correctAnswer}`}
-              </p>
-            )}
+            {selectedAnswer && <p className={isCorrect ? "correct-text" : "incorrect-text"}>{isCorrect ? "Correct!" : `Incorrect! The correct answer is: ${question.correctAnswer}`}</p>}
 
             {/* Progress bar animation, starts only after an answer is clicked */}
             {selectedAnswer && (
