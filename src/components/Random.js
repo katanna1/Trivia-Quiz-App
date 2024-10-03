@@ -11,6 +11,10 @@ const Random = () => {
   const [isCorrect, setIsCorrect] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
+  const [showNextQuestion, setShowNextQuestion] = useState(false);
+  const [progress, setProgress] = useState(100);
+  const [timerActive, setTimerActive] = useState(false);
+
   const navigate = useNavigate();
 
   const fetchQuestion = async () => {
@@ -19,10 +23,6 @@ const Random = () => {
       const response = await fetch("https://opentdb.com/api.php?amount=1&type=multiple");
       const data = await response.json();
 
-      // Log the API response for debugging
-      console.log("API Response:", data);
-
-      // Check if results exist
       if (!data.results || data.results.length === 0) {
         throw new Error("No questions found in the API response.");
       }
@@ -40,6 +40,9 @@ const Random = () => {
       setSelectedAnswer(null); // Reset the selected answer
       setIsCorrect(null); // Reset correctness check
       setShowCorrectAnswer(false); // Hide the correct answer when new question loads
+      setShowNextQuestion(false); // Hide next question button when new question loads
+      setProgress(100); // Reset progress bar
+      setTimerActive(false); // Stop the timer on new question
     } catch (error) {
       console.error("Error fetching question:", error);
       alert("Failed to load question. Please try again.");
@@ -52,10 +55,29 @@ const Random = () => {
     fetchQuestion();
   }, []);
 
+  // Progress bar countdown logic, but only when timerActive is true
+  useEffect(() => {
+    if (timerActive && progress > 0) {
+      const interval = setInterval(() => {
+        setProgress((prevProgress) => {
+          const newProgress = prevProgress - 20;
+          if (newProgress <= 0) {
+            clearInterval(interval);
+            setTimeout(() => setShowNextQuestion(true), 500); // Small delay before showing the button
+          }
+          return newProgress;
+        });
+      }, 1000); // Decrease progress every second
+
+      return () => clearInterval(interval);
+    }
+  }, [timerActive, progress]);
+
   const handleAnswerClick = (answer) => {
     setSelectedAnswer(answer);
     setIsCorrect(answer === question.correctAnswer);
-    setShowCorrectAnswer(true); // Show the correct answer after the user clicks an answer
+    setShowCorrectAnswer(true); // Show correct answer after user selects an answer
+    setTimerActive(true); // Start the timer after the answer is selected
   };
 
   const handleNextQuestionClick = () => {
@@ -89,11 +111,25 @@ const Random = () => {
               </>
             )}
 
+            {/* Display feedback after an answer is selected */}
             {selectedAnswer && (
-              <>
-                <p className={isCorrect ? "correct-text" : "incorrect-text"}>{isCorrect ? "Correct!" : `Incorrect! The correct answer is: ${question.correctAnswer}`}</p>
-                <button onClick={handleNextQuestionClick}>Next Random Question</button> {/* Button to fetch the next question */}
-              </>
+              <p className={isCorrect ? "correct-text" : "incorrect-text"}>
+                {isCorrect ? "Correct!" : `Incorrect! The correct answer is: ${question.correctAnswer}`}
+              </p>
+            )}
+
+            {/* Progress bar animation, starts only after an answer is clicked */}
+            {selectedAnswer && (
+              <div className="progress-bar-wrapper">
+                <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+              </div>
+            )}
+
+            {/* Show "Next Question" button only when the progress bar finishes */}
+            {showNextQuestion && (
+              <button className="next-question-btn fade-in" onClick={handleNextQuestionClick}>
+                Next Question
+              </button>
             )}
           </>
         )}
