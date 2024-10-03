@@ -15,22 +15,37 @@ const Random = () => {
 
   const fetchQuestion = async () => {
     setLoading(true);
-    const response = await fetch("https://opentdb.com/api.php?amount=1&type=multiple");
-    const data = await response.json();
-    const triviaData = data.results[0];
+    try {
+      const response = await fetch("https://opentdb.com/api.php?amount=1&type=multiple");
+      const data = await response.json();
 
-    const formattedQuestion = {
-      question: triviaData.question,
-      correctAnswer: triviaData.correct_answer,
-      answers: [...triviaData.incorrect_answers, triviaData.correct_answer].sort(() => Math.random() - 0.5),
-    };
+      // Log the API response for debugging
+      console.log("API Response:", data);
 
-    setQuestion(formattedQuestion);
-    setAnswers(formattedQuestion.answers);
-    setSelectedAnswer(null); // Reset the selected answer
-    setIsCorrect(null); // Reset correctness check
-    setShowCorrectAnswer(false); // Hide the correct answer when new question loads
-    setLoading(false);
+      // Check if results exist
+      if (!data.results || data.results.length === 0) {
+        throw new Error("No questions found in the API response.");
+      }
+
+      const triviaData = data.results[0];
+
+      const formattedQuestion = {
+        question: triviaData.question,
+        correctAnswer: triviaData.correct_answer,
+        answers: [...triviaData.incorrect_answers, triviaData.correct_answer].sort(() => Math.random() - 0.5),
+      };
+
+      setQuestion(formattedQuestion);
+      setAnswers(formattedQuestion.answers);
+      setSelectedAnswer(null); // Reset the selected answer
+      setIsCorrect(null); // Reset correctness check
+      setShowCorrectAnswer(false); // Hide the correct answer when new question loads
+    } catch (error) {
+      console.error("Error fetching question:", error);
+      alert("Failed to load question. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -43,8 +58,8 @@ const Random = () => {
     setShowCorrectAnswer(true); // Show the correct answer after the user clicks an answer
   };
 
-  const handleReloadClick = () => {
-    fetchQuestion(); // Re-fetch a new question
+  const handleNextQuestionClick = () => {
+    fetchQuestion(); // Fetch a new question when the button is clicked
   };
 
   return (
@@ -74,11 +89,12 @@ const Random = () => {
               </>
             )}
 
-            {selectedAnswer && <p className={isCorrect ? "correct-text" : "incorrect-text"}>{isCorrect ? "Correct!" : `Incorrect! The correct answer is: ${question.correctAnswer}`}</p>}
-
-            <button onClick={handleReloadClick} className="reload-btn">
-              Reload Question
-            </button>
+            {selectedAnswer && (
+              <>
+                <p className={isCorrect ? "correct-text" : "incorrect-text"}>{isCorrect ? "Correct!" : `Incorrect! The correct answer is: ${question.correctAnswer}`}</p>
+                <button onClick={handleNextQuestionClick}>Next Random Question</button> {/* Button to fetch the next question */}
+              </>
+            )}
           </>
         )}
       </div>
