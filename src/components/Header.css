@@ -1,20 +1,23 @@
 :root {
-  --header-height: 60px;
-  --background-color: #333; /* Header background color */
-  --text-color: white; /* Text color */
-  --button-background: #4caf50; /* Button background color */
-  --button-hover: #45a049; /* Button hover color */
-  --button-focus: rgba(0, 123, 255, 0.5); /* Button focus outline color */
-  --button-text-color: #000; /* Button text color */
-  --button-radius: 20px; /* Button border radius */
-  --button-padding: 10px 20px; /* Button padding */
-  --font-size: 18px; /* Base font size */
-  --register-button-color: #007bff; /* Register button color */
-  --register-button-hover: #0056b3; /* Register button hover color */
+  --header-height: 70px;
+  --background-color: #0d0d0d; /* Darker header background color */
+  --text-color: #ffffff; /* White text color for better contrast */
+  --button-background: #4d4d4d; /* Slightly brighter button background color */
+  --button-hover: #666666; /* Darker button hover color */
+  --button-focus: rgba(255, 255, 255, 0.7); /* Lighter focus outline */
+  --button-text-color: #ffffff; /* Button text color */
+  --button-radius: 8px; /* Subtle border radius for buttons */
+  --button-padding: 8px 16px; /* Adjusted button padding */
+  --font-size: 16px; /* Base font size */
+  --register-button-color: #28a745; /* Register button color */
+  --register-button-hover: #218838; /* Register button hover color */
 }
 
 body {
-  margin-top: var(--header-height); /* Adjust body margin to accommodate fixed header */
+  margin-top: var(--header-height); /* Ensure content does not overlap with the header */
+  font-family: 'Arial', sans-serif;
+  color: var(--text-color); /* Brighter text color */
+  background-color: #202020; /* Darker body background */
 }
 
 .header {
@@ -23,81 +26,78 @@ body {
   align-items: center;
   padding: 0 20px;
   height: var(--header-height);
-  background-color: var(--background-color); /* Set header background */
-  color: var(--text-color); /* Set header text color */
+  background-color: var(--background-color); /* Darker header background */
+  color: var(--text-color); /* White text color */
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Slight shadow effect */
 }
 
 .icon {
   width: 40px;
   height: 40px;
-  background-color: transparent; /* Icon container style */
+  background-color: transparent; /* Keep icon background transparent */
 }
 
 .know-it-all {
-  font-size: 28px; /* Font size for title */
-  font-weight: bold; /* Font weight for title */
-  color: #ffffff; /* Title text color */
-  cursor: pointer; /* Pointer cursor for title */
-  text-align: center; /* Center the title */
-  flex-grow: 1; /* Allow title to take available space */
-  display: flex; /* Flexbox for alignment */
-  justify-content: center; /* Center alignment */
-  align-items: center; /* Center alignment */
+  font-size: 30px; /* Increase title font size */
+  font-weight: bold;
+  color: var(--text-color); /* Keep text color white */
+  cursor: pointer;
+  text-align: center;
+  flex-grow: 1; /* Ensure title is centered and takes available space */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header-buttons {
-  display: flex; /* Flexbox for buttons */
-  gap: 10px; /* Space between buttons */
+  display: flex;
+  gap: 15px; /* Increase space between buttons */
 }
 
 .random-button,
 .friends-button,
 .login-button,
 .register-button {
-  border-radius: var(--button-radius); /* Button border radius */
-  padding: var(--button-padding); /* Button padding */
-  font-size: var(--font-size); /* Font size */
-  cursor: pointer; /* Pointer cursor for buttons */
-  transition: background-color 0.3s ease; /* Transition effect for hover */
+  background-color: var(--button-background); /* Slightly brighter button background */
+  color: var(--button-text-color); /* White button text color */
+  border-radius: var(--button-radius); /* Keep button radius subtle */
+  padding: var(--button-padding); /* Adjust button padding */
+  font-size: var(--font-size); /* Button text size */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover and focus transition */
   border: none; /* No border */
-}
-
-.random-button,
-.friends-button,
-.login-button {
-  background-color: var(--button-background); /* Button background color */
-  color: var(--button-text-color); /* Button text color */
 }
 
 .random-button:hover,
 .friends-button:hover,
-.login-button:hover {
-  background-color: var(--button-hover); /* Button hover color */
+.login-button:hover,
+.register-button:hover {
+  background-color: var(--button-hover); /* Darker hover state */
+  transform: scale(1.05); /* Slight scale effect on hover */
 }
 
 .random-button:focus,
 .friends-button:focus,
-.login-button:focus {
-  outline: none; /* No outline on focus */
-  box-shadow: 0 0 0 2px var(--button-focus); /* Focus outline */
+.login-button:focus,
+.register-button:focus {
+  outline: none; /* Remove outline */
+  box-shadow: 0 0 0 3px var(--button-focus); /* Focus outline */
 }
 
 .register-button {
-  background-color: var(--register-button-color); /* Register button color */
-  color: white; /* Register button text color */
+  background-color: var(--register-button-color); /* Brighter register button */
 }
 
 .register-button:hover {
-  background-color: var(--register-button-hover); /* Register button hover color */
+  background-color: var(--register-button-hover); /* Hover color for register button */
 }
 
 .register-button:focus {
-  outline: none; /* No outline on focus */
-  box-shadow: 0 0 0 2px var(--button-focus); /* Focus outline */
+  outline: none;
+  box-shadow: 0 0 0 3px var(--button-focus);
 }
