@@ -1,43 +1,29 @@
-/* General styles */
-:root {
-  --primary-color: #4caf50;
-  --hover-color: #45a049;
-  --background-color: #f4f4f4;
-  --form-background: white;
-  --text-color: #333;
-  --border-radius: 10px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
 
-body {
-  margin: 0;
-  font-family: "Arial", sans-serif;
-}
-
-/* Login container */
 .login-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   padding: 20px;
-  background-color: var(--background-color);
+  background: #d6f6ff; 
 }
 
-/* Form styling */
+/*card*/
 .login-form {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 400px; /* Maximum width of the form */
-  background-color: var(--form-background);
+  align-items: center; 
+  justify-content: center;
+  width: 500px;
+  height: 500px;
+  background: #33ccd0;
   padding: 20px;
-  border-radius: var(--border-radius);
+  border-radius: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  animation: slideIn 0.5s ease; /* Animation for fun effect */
+  animation: slideIn 0.5s ease;
 }
 
-/* Animation */
 @keyframes slideIn {
   from {
     transform: translateY(-20px);
@@ -49,72 +35,70 @@ body {
   }
 }
 
-/* Form header */
+/*login text*/
 .login-form h1 {
+  color: #000;
   text-align: center;
-  color: var(--primary-color);
+  font-family: "Comic Neue", Arial, sans-serif;
+  font-size: 64px;
+  font-weight: 700;
   margin-bottom: 20px;
+  line-height: normal;
 }
 
-/* Label styling */
+/*user and pass*/
 .form-group {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
   margin-bottom: 15px;
+  font-family: "Comic Neue", Arial, sans-serif;
 }
 
-.login-form label {
-  margin-bottom: 5px;
-  font-size: 16px;
-}
-
-/* Input styling */
-.login-form input {
+/*form input*/
+.form-group input {
+  width: 380px;
+  height: 60px;
+  border-radius: 10px;
+  background: #fff;
   padding: 10px;
-  font-size: 16px;
+  font-size: 32px;
+  font-family: "Comic Neue", Arial, sans-serif;
+  font-weight: 400;
+  line-height: normal;
+  color: #636b6a;
   border: 1px solid #ddd;
-  border-radius: 5px;
   transition: border-color 0.3s;
+  text-align: center; 
 }
 
-.login-form input:focus {
-  border-color: var(--primary-color); /* Highlight border on focus */
-  outline: none; /* Remove outline */
+
+.form-group input:focus {
+  color: #7539A9;
+  outline: none;
 }
 
-/* Button styling */
 .button-group {
   display: flex;
-  flex-direction: column; /* Stack buttons vertically */
-  align-items: center; /* Center buttons */
-  margin-top: 20px; /* Space above buttons */
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  
 }
 
-.submit-button,
-.back-button {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 12px 20px; /* Increased padding for better click area */
+.submit-button {
+  width: 185px;
+  height: 80px;
+  background: #7539a9; 
   border: none;
-  border-radius: var(--border-radius);
-  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  width: 100%; /* Full width for buttons */
-  margin: 5px 0; /* Space between buttons */
-}
-
-.submit-button:hover,
-.back-button:hover {
-  background-color: var(--hover-color);
-  transform: scale(1.05); /* Scale effect on hover */
-}
-
-/* Back button specific style */
-.back-button {
-  background-color: #ff5722; /* Different color for the back button */
-}
-
-.back-button:hover {
-  background-color: #e64a19; /* Darker shade on hover */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Comic Neue", Arial, sans-serif;
+  color: #fff;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
