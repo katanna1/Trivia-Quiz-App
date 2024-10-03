@@ -1,0 +1,159 @@
+/* Main container for the Random page */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f8ff;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Trivia container for question and answers */
+.trivia-container {
+  background-color: #ffffff;
+  border: 2px solid #000;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+  margin: 20px auto; /* Center horizontally */
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Trivia question styling */
+.trivia-container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.trivia-container p {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  max-width: 100%; /* Prevent overflow */
+  word-wrap: break-word; /* Ensure long words break correctly */
+  text-align: center;
+}
+
+/* Answer list styling */
+.trivia-container ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  margin: 0;
+}
+
+.answer-option {
+  background-color: #e7e7e7;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.answer-option:hover {
+  background-color: #dcdcdc;
+}
+
+/* Styling for selected and correct answers */
+.answer-option.selected {
+  background-color: #ffeb3b; /* Yellow for selected answer */
+}
+
+.answer-option.correct {
+  background-color: #4caf50; /* Green for correct answer */
+}
+
+/* Correct/incorrect text */
+.correct-text {
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.incorrect-text {
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .trivia-container {
+    max-width: 90%;
+    padding: 10px;
+  }
+
+  .answer-option {
+    font-size: 14px; /* Slightly smaller text for mobile */
+    padding: 8px; /* Adjust padding for smaller screens */
+  }
+}
+/* Styling for the reload question button */
+.reload-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reload-btn:hover {
+  background-color: #45a049;
+}
+/* Styling for selected and correct answers */
+.answer-option.selected {
+  background-color: #f44336; /* Red for incorrect selected answer */
+  color: white;
+}
+
+.answer-option.correct {
+  background-color: #4caf50; /* Green for correct answer */
+  color: white;
+}
+
+/* Correct/incorrect text */
+.correct-text {
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.incorrect-text {
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Reload button styling */
+.reload-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reload-btn:hover {
+  background-color: #45a049;
+}

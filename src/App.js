@@ -8,6 +8,9 @@ import Support from "./components/Support";
 import Contact from "./components/Contact";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Friends from "./components/Friends";
+import Random from "./components/Random"; // Corrected import statement
+import FetchQuestions from "./components/fetchQuestions"; // Adjusted import case
 
 function App() {
   return (
@@ -22,6 +25,11 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/random" element={<Random />} />
+          <Route path="/friends" element={<Friends />} />
+
+          {/* New Route for FetchQuestions */}
+          <Route path="/fetch-questions/:topicId/:difficulty" element={<FetchQuestions />} />
         </Routes>
       </div>
     </Router>
