@@ -13,20 +13,20 @@ const FetchQuestions = () => {
     try {
       const url = `https://opentdb.com/api.php?amount=10&category=${topicId}&difficulty=${difficulty}&type=multiple`;
       console.log(`Fetching questions from: ${url}`);
-  
+
       const response = await fetch(url);
-  
+
       // Log response status and full response for debugging
-      console.log('Response Status:', response.status);
-      console.log('Response:', response);
-  
+      console.log("Response Status:", response.status);
+      console.log("Response:", response);
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-  
+
       const data = await response.json();
       console.log("API Response Data:", data);
-  
+
       if (data.results && Array.isArray(data.results) && data.results.length > 0) {
         setQuestions(data.results);
       } else {
@@ -39,7 +39,6 @@ const FetchQuestions = () => {
       setLoading(false);
     }
   };
-  
 
   useEffect(() => {
     fetchQuestions(); // Call the function on component mount
@@ -53,10 +52,10 @@ const FetchQuestions = () => {
         <ul>
           {questions.map((question, index) => (
             <li key={index}>
-              <h3>{question.question}</h3>
+              <h3 dangerouslySetInnerHTML={{ __html: question.question }} />
               <ul>
                 {question.incorrect_answers.concat(question.correct_answer).map((answer, i) => (
-                  <li key={i}>{answer}</li>
+                  <li key={i} dangerouslySetInnerHTML={{ __html: answer }} />
                 ))}
               </ul>
             </li>
