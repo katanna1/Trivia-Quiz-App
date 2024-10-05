@@ -16,7 +16,7 @@ function Register() {
     <div className="register-container">
       <Header />
       <main className="register-form">
-        <h1>🎉 Register Now!</h1>
+        <h1>Register</h1>
         <form>
           <div className="form-group">
             <label htmlFor="username">Username:</label>

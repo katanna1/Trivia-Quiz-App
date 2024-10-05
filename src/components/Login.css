@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap');
+/*login.css*/
 
+
+/*glue for login card*/
 .login-container {
   display: flex;
   align-items: center;
@@ -7,6 +11,7 @@
   min-height: 100vh;
   padding: 20px;
   background: #d6f6ff; 
+  padding: 40px 20px;
 }
 
 /*card*/
@@ -35,15 +40,16 @@
   }
 }
 
-/*login text*/
+/*main login text*/
 .login-form h1 {
   color: #000;
   text-align: center;
   font-family: "Comic Neue", Arial, sans-serif;
-  font-size: 64px;
+  font-size: 90px;
   font-weight: 700;
   margin-bottom: 20px;
   line-height: normal;
+  margin-top: 0;
 }
 
 /*user and pass*/
@@ -64,7 +70,7 @@
   background: #fff;
   padding: 10px;
   font-size: 32px;
-  font-family: "Comic Neue", Arial, sans-serif;
+  font-family: "PT Sans", Arial, sans-serif;
   font-weight: 400;
   line-height: normal;
   color: #636b6a;
@@ -88,10 +94,11 @@
   
 }
 
+/* Login button */
 .submit-button {
-  width: 185px;
+  width: auto !important; 
   height: 80px;
-  background: #7539a9; 
+  background: #7539a9 !important;
   border: none;
   cursor: pointer;
   display: flex;
@@ -101,4 +108,38 @@
   color: #fff;
   border-radius: 10px;
   margin-bottom: 10px;
+  font-size: 48px !important;
+}
+
+/*back button*/
+.back-button {
+  background: #7539A9 !important;
+  width: auto !important;
+  font-family: "Comic Neue", Arial, sans-serif;
+  font-size: 32px !important;
+}
+
+/* Mobile devices: 320px to 480px */
+@media (max-width: 480px) {
+
+}
+
+/* Tablets: 481px to 768px */
+@media (min-width: 481px) and (max-width: 768px) {
+ 
+}
+
+/* Laptops: 769px to 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+}
+
+/* Desktops: 1025px to 1200px */
+@media (min-width: 1025px) and (max-width: 1200px) {
+ 
+}
+
+/* Large screens: Greater than 1200px */
+@media (min-width: 1201px) {
+ 
 }
