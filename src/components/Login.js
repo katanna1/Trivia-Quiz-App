@@ -16,7 +16,7 @@ function Login() {
     <div className="login-container">
       <Header />
       <main className="login-form">
-        <h1>🔑 Login</h1>
+        <h1>Login</h1>
         <form>
           <div className="form-group">
             <label htmlFor="username">Username:</label>
