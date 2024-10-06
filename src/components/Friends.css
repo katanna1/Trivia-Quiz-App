@@ -1,0 +1,45 @@
+.friends-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* background: #33ccd0; */
+  background: #f4f4f4;
+
+
+}
+
+
+.nav-bar {
+  background-color: white;
+  padding: 10px ;
+ 
+}
+.nav-list {
+  list-style: none;
+  display: flex; /* Flexbox to display items side by side */
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+
+.nav-item {
+  margin: 120px; /* Adds space between each link */
+  /* color: white; */
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+ 
+}
+.nav-list li {
+  position: relative;
+}
+ .nav-list li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  border-right: 1px solid black; /* Adjust color and style as needed */
+}

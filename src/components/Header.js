@@ -23,6 +23,9 @@ const Header = () => {
         <button className="random-button" onClick={() => navigate("/Random")}>
           Random
         </button>
+        <button className="friends-button" onClick={() => navigate("/Friends")}>
+          Friends
+        </button>
       </div>
     </header>
   );
