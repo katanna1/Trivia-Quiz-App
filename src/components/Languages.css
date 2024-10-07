@@ -16,7 +16,7 @@
 }
 
 .back-button {
-  background-color: #007bff;
+  background-color: #0773e6;
   color: white;
   padding: 15px 30px; /* Larger padding for a rectangular shape */
   border: none;
@@ -32,33 +32,29 @@
   background-color: #0056b3;
 }
 
-.languages-title {
-  font-size: 36px;
+.language-button {
+  font-size: 30px;
   color: #333;
   margin-bottom: 20px;
+  margin-top: 10px;
+  font-weight: 500;
+  border-radius: 10%;
+  cursor: pointer;
 }
 
-.languages-text {
-  font-size: 18px;
-  color: #666;
-  margin-bottom: 30px;
+.language-button:hover {
+  background-color: #cfcece;
+}
+
+.language-button.active-language {
+  background-color: rgb(118, 73, 135);  /* Bright color for active language */
+  color: white;
 }
 
 .languages-list {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.languages-list li {
-  font-size: 20px;
-  color: #333;
-  padding: 10px 0;
-  border-bottom: 1px solid #ddd;
-}
-
-.languages-list li:last-child {
-  border-bottom: none; /* Remove the last border */
 }
 
 /* Ensure footer stays at the bottom */
