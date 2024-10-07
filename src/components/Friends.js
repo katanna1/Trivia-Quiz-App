@@ -7,7 +7,7 @@ import Footer from "./Footer";
 function Friends() {
   const navigate = useNavigate();
 
-  const [friends, setFriends] = useState([
+  const [friends] = useState([
     "Alice",
     "Bob",
     "Charlie",
