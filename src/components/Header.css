@@ -15,7 +15,7 @@
 
 body {
   margin-top: var(--header-height); /* Ensure content does not overlap with the header */
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   color: var(--text-color); /* Brighter text color */
   background-color: #202020; /* Darker body background */
 }
@@ -33,7 +33,7 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Slight shadow effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .icon {
