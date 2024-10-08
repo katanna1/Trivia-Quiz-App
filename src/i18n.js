@@ -19,6 +19,8 @@ i18n
             know_it_all: "Know It All",
             login : "Login",
             register: "Register",
+            friends: "Friends",
+            random: "Random",
           }
         },
         ru: {
@@ -29,6 +31,8 @@ i18n
             know_it_all: "Знай Всё",
             login : "Войти",
             register: "Регистрация",
+            friends: "Друзья",
+            random: "Случайный",
           }
         },
       }
