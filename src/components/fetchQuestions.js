@@ -10,8 +10,26 @@ const FetchQuestions = () => {
   const fetchQuestions = async () => {
     setLoading(true);
     setError(null);
+
+    // Set the number of questions based on difficulty
+    let questionCount = 5; // Default to 5 questions
+
+    switch (difficulty) {
+      case "hard":
+        questionCount = 10; // 10 questions for hard mode
+        break;
+      case "medium":
+        questionCount = 7; // 7 questions for medium mode
+        break;
+      case "easy":
+        questionCount = 5; // 5 questions for easy mode
+        break;
+      default:
+        questionCount = 5; // Fallback in case of an unexpected value
+    }
+
     try {
-      const url = `https://opentdb.com/api.php?amount=10&category=${topicId}&difficulty=${difficulty}&type=multiple`;
+      const url = `https://opentdb.com/api.php?amount=${questionCount}&category=${topicId}&difficulty=${difficulty}&type=multiple`;
       console.log(`Fetching questions from: ${url}`);
 
       const response = await fetch(url);
