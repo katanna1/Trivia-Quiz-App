@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Random.css";
+import "./Random.css"; // Use the same CSS file as QuestionPage.css
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -37,12 +37,7 @@ const Random = () => {
 
       setQuestion(formattedQuestion);
       setAnswers(formattedQuestion.answers);
-      setSelectedAnswer(null); // Reset the selected answer
-      setIsCorrect(null); // Reset correctness check
-      setShowCorrectAnswer(false); // Hide the correct answer when new question loads
-      setShowNextQuestion(false); // Hide next question button when new question loads
-      setProgress(100); // Reset progress bar
-      setTimerActive(false); // Stop the timer on new question
+      resetState(); // Reset states on new question load
     } catch (error) {
       console.error("Error fetching question:", error);
       alert("Failed to load question. Please try again.");
@@ -51,23 +46,32 @@ const Random = () => {
     }
   };
 
+  const resetState = () => {
+    setSelectedAnswer(null);
+    setIsCorrect(null);
+    setShowCorrectAnswer(false);
+    setShowNextQuestion(false);
+    setProgress(100);
+    setTimerActive(false);
+  };
+
   useEffect(() => {
-    fetchQuestion();
+    fetchQuestion(); // Load a question on component mount
   }, []);
 
-  // Progress bar countdown logic, but only when timerActive is true
+  // Smooth progress bar countdown logic
   useEffect(() => {
     if (timerActive && progress > 0) {
       const interval = setInterval(() => {
         setProgress((prevProgress) => {
-          const newProgress = prevProgress - 20;
+          const newProgress = prevProgress - 2.5; // Decrease progress in small steps
           if (newProgress <= 0) {
             clearInterval(interval);
             setTimeout(() => setShowNextQuestion(true), 500); // Small delay before showing the button
           }
           return newProgress;
         });
-      }, 1000); // Decrease progress every second
+      }, 62.5); // Update every 62.5ms for smooth animation over 4 seconds
 
       return () => clearInterval(interval);
     }
@@ -88,9 +92,9 @@ const Random = () => {
   };
 
   return (
-    <div className="home-container">
+    <div className="random-page-container">
       <Header />
-      <div className="trivia-container">
+      <div className="random-container">
         {loading ? (
           <p>Loading question...</p>
         ) : (
@@ -102,7 +106,7 @@ const Random = () => {
                   {answers.map((answer, index) => (
                     <li
                       key={index}
-                      className={`answer-option 
+                      className={`random-answer-option 
                         ${selectedAnswer === answer ? (isCorrect ? "correct" : "selected") : ""}
                         ${showCorrectAnswer && answer === question.correctAnswer ? "correct" : ""}
                       `}
@@ -119,14 +123,14 @@ const Random = () => {
 
             {/* Progress bar animation, starts only after an answer is clicked */}
             {selectedAnswer && (
-              <div className="progress-bar-wrapper">
-                <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+              <div className="random-progress-bar-wrapper">
+                <div className="random-progress-bar" style={{ width: `${progress}%` }}></div>
               </div>
             )}
 
             {/* Show "Next Question" button only when the progress bar finishes */}
             {showNextQuestion && (
-              <button className="next-question-btn fade-in" onClick={handleNextQuestionClick}>
+              <button className="random-next-question-btn random-fade-in" onClick={handleNextQuestionClick}>
                 Next Question
               </button>
             )}

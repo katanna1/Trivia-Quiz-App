@@ -1,5 +1,5 @@
 /* Main container for the Random page */
-.home-container {
+.random-page-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,31 +10,32 @@
   font-family: Arial, sans-serif;
 }
 
-/* Trivia container for question and answers */
-.trivia-container {
+/* Random container for question and answers */
+.random-container {
   background-color: #ffffff;
   border: 2px solid #000;
   border-radius: 10px;
-  max-width: 600px;
+  max-width: 650px; /* Increase width to match QuestionPage */
   width: 100%;
-  padding: 20px;
+  padding: 30px; /* Same padding as in QuestionPage */
   margin: 20px auto;
   text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Same box-shadow */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-/* Trivia question styling */
-.trivia-container h2 {
-  font-size: 24px;
+/* Random question styling */
+.random-container h2 {
+  font-size: 26px; /* Match font size from QuestionPage */
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-.trivia-container p {
+/* Styling for question display */
+.random-container p {
   font-size: 18px;
   margin-bottom: 15px;
   line-height: 1.5;
@@ -43,66 +44,72 @@
 }
 
 /* Answer list styling */
-.trivia-container ul {
+.random-container ul {
   list-style-type: none;
   padding: 0;
   width: 100%;
   margin: 0;
 }
 
-.answer-option {
+/* Answer option styling */
+.random-answer-option {
   background-color: #e7e7e7;
   border-radius: 5px;
-  padding: 10px;
-  margin: 10px 0;
-  font-size: 16px;
+  padding: 15px;
+  margin: 15px 0;
+  font-size: 18px;
   cursor: pointer;
   text-align: center;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Add transitions for hover effects */
 }
 
-.answer-option:hover {
-  background-color: #dcdcdc;
+/* Hover effect with blue color */
+.random-answer-option:hover {
+  background-color: #007bff; /* Blue color on hover */
+  transform: scale(1.05); /* Slightly enlarges the option on hover */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+  color: white; /* Change text color to white on hover */
 }
 
 /* Styling for selected and correct answers */
-.answer-option.selected {
+.random-answer-option.selected {
   background-color: #f44336; /* Red for incorrect selected answer */
   color: white;
 }
 
-.answer-option.correct {
+.random-answer-option.correct {
   background-color: #4caf50; /* Green for correct answer */
   color: white;
 }
 
 /* Progress bar container */
-.progress-bar-wrapper {
+.random-progress-bar-wrapper {
   width: 100%;
   background-color: #f0f0f0;
-  height: 20px;
+  height: 25px; /* Same height as in QuestionPage */
   border-radius: 10px;
   margin-top: 20px;
   overflow: hidden;
   border: 2px solid #000;
 }
 
-/* Progress bar itself */
-.progress-bar {
+/* Progress bar styling */
+.random-progress-bar {
   height: 100%;
-  background-color: #4caf50;
-  transition: width 1s linear;
+  background-color: #ff4500; /* Orange red */
+  border-radius: 10px;
+  transition: width 0.0625s linear;
 }
 
 /* Button for next question */
-.next-question-btn {
+.random-next-question-btn {
   background-color: #4caf50;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 15px 30px;
   margin-top: 20px;
   border-radius: 5px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   display: block;
@@ -111,7 +118,7 @@
 }
 
 /* Fade-in animation for next question button */
-.fade-in {
+.random-fade-in {
   animation: fadeIn 0.5s forwards;
 }
 
@@ -128,6 +135,24 @@
 }
 
 /* Button hover effect */
-.next-question-btn:hover {
+.random-next-question-btn:hover {
   background-color: #45a049;
+}
+/* Progress bar container */
+.random-progress-bar-wrapper {
+  width: 100%;
+  background-color: #f0f0f0;
+  height: 25px;
+  border-radius: 10px;
+  margin-top: 20px;
+  overflow: hidden;
+  border: 2px solid #000;
+}
+
+/* Progress bar styling */
+.random-progress-bar {
+  height: 100%;
+  background-color: #ff4500;
+  border-radius: 10px;
+  transition: width 0.0625s linear; /* Ensure smooth transition for width */
 }

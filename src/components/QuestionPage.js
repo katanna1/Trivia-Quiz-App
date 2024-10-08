@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./QuestionPage.css";
+import "./QuestionPage.css"; // Use the same CSS file as Random.js
 import Header from "./Header";
 import Footer from "./Footer";
 
@@ -13,41 +13,42 @@ const QuestionPage = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isCorrect, setIsCorrect] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
   const [showNextQuestion, setShowNextQuestion] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(100);
   const [timerActive, setTimerActive] = useState(false);
-  const [score, setScore] = useState(0);
   const [quizEnded, setQuizEnded] = useState(false);
+  const [score, setScore] = useState(0);
+
+  const fetchQuestions = async () => {
+    if (!topicId || !difficulty) {
+      alert("Topic ID or difficulty is missing.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const questionCount = difficulty === "hard" ? 10 : difficulty === "medium" ? 7 : 5;
+      const response = await fetch(`https://opentdb.com/api.php?amount=${questionCount}&category=${topicId}&difficulty=${difficulty}&type=multiple`);
+      const data = await response.json();
+
+      const formattedQuestions = data.results.map((item) => ({
+        question: item.question,
+        correctAnswer: item.correct_answer,
+        answers: [...item.incorrect_answers, item.correct_answer].sort(() => Math.random() - 0.5),
+      }));
+
+      setQuestions(formattedQuestions);
+    } catch (error) {
+      console.error("Error fetching questions:", error);
+      alert("Failed to load questions. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchQuestions = async () => {
-      if (!topicId || !difficulty) {
-        alert("Topic ID or difficulty is missing.");
-        return;
-      }
-
-      setLoading(true);
-      try {
-        const response = await fetch(`https://opentdb.com/api.php?amount=5&category=${topicId}&difficulty=${difficulty}&type=multiple`);
-        const data = await response.json();
-
-        const formattedQuestions = data.results.map((item) => ({
-          question: item.question,
-          correctAnswer: item.correct_answer,
-          answers: [...item.incorrect_answers, item.correct_answer].sort(() => Math.random() - 0.5),
-        }));
-
-        setQuestions(formattedQuestions);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching questions:", error);
-        alert("Failed to load questions. Please try again.");
-        setLoading(false);
-      }
-    };
-
     fetchQuestions();
   }, [topicId, difficulty]);
 
@@ -55,14 +56,14 @@ const QuestionPage = () => {
     if (timerActive && progress > 0) {
       const interval = setInterval(() => {
         setProgress((prevProgress) => {
-          const newProgress = prevProgress - 20;
+          const newProgress = prevProgress - 4;
           if (newProgress <= 0) {
             clearInterval(interval);
             setShowNextQuestion(true);
           }
           return newProgress;
         });
-      }, 1000);
+      }, 62.5);
 
       return () => clearInterval(interval);
     }
@@ -85,61 +86,70 @@ const QuestionPage = () => {
   };
 
   const handleNextQuestionClick = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      resetQuestionState();
+    } else {
+      setQuizEnded(true);
+    }
+  };
+
+  const resetQuestionState = () => {
     setSelectedAnswer(null);
     setIsCorrect(null);
     setShowCorrectAnswer(false);
     setShowNextQuestion(false);
     setProgress(100);
     setTimerActive(false);
-
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      setQuizEnded(true); // End quiz and show final score
-    }
   };
 
   const handleReplay = () => {
-    window.location.reload(); // Reload the page for replay
+    window.location.reload();
   };
 
   const handleBack = () => {
-    navigate("/choose-topic"); // Navigate back to choose topic page
+    navigate("/choose-topic");
   };
 
   const handleSkip = () => {
-    navigate("/"); // Navigate to home page
+    navigate("/");
   };
 
   return (
     <div className="question-page-container">
       <Header />
-      <main className="question-page-main">
-        <h1>Trivia Questions</h1>
-
+      <div className="question-container">
         {loading ? (
           <p>Loading questions...</p>
         ) : quizEnded ? (
           <div className="score-section">
-            <h2>Your Score</h2>
-            <p>{score}</p>
-
+            <h2>Your Final Score</h2>
+            <p>{score}</p> {/* Display the final score */}
             <div className="end-options">
-              <button onClick={() => alert(JSON.stringify(questions, null, 2))}>Answers</button>
-              <button onClick={handleReplay}>Replay</button>
-              <button onClick={handleBack}>Back</button>
-              <button onClick={handleSkip}>Skip</button>
+              <ul>
+                <li>
+                  <button onClick={() => alert(JSON.stringify(questions, null, 2))}>Answers</button>
+                </li>
+                <li>
+                  <button onClick={handleReplay}>Replay</button>
+                </li>
+                <li>
+                  <button onClick={handleBack}>Back</button>
+                </li>
+                <li>
+                  <button onClick={handleSkip}>Skip</button>
+                </li>
+              </ul>
             </div>
           </div>
         ) : (
           <>
             {questions.length > 0 && (
               <>
-                <h2
-                  dangerouslySetInnerHTML={{
-                    __html: questions[currentQuestionIndex].question,
-                  }}
-                />
+                <p className="question-number">
+                  Question {currentQuestionIndex + 1} of {questions.length}
+                </p>
+                <h2 dangerouslySetInnerHTML={{ __html: questions[currentQuestionIndex].question }} />
                 <ul>
                   {questions[currentQuestionIndex].answers.map((answer, index) => (
                     <li
@@ -171,7 +181,7 @@ const QuestionPage = () => {
             )}
           </>
         )}
-      </main>
+      </div>
       <Footer />
     </div>
   );
