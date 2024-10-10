@@ -21,6 +21,7 @@ i18n
             register: "Register",
             friends: "Friends",
             random: "Random",
+            test: "test"
           }
         },
         ru: {
