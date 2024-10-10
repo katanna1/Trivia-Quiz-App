@@ -23,7 +23,7 @@ const QuestionPage = () => {
 
   const fetchQuestions = async () => {
     if (!topicId || !difficulty) {
-      alert("Topic ID or difficulty is missing.");
+      console.error("Topic ID or difficulty is missing.");
       return;
     }
 
@@ -42,7 +42,6 @@ const QuestionPage = () => {
       setQuestions(formattedQuestions);
     } catch (error) {
       console.error("Error fetching questions:", error);
-      alert("Failed to load questions. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -128,7 +127,7 @@ const QuestionPage = () => {
             <div className="end-options">
               <ul>
                 <li>
-                  <button onClick={() => alert(JSON.stringify(questions, null, 2))}>Answers</button>
+                  <button onClick={() => console.log(questions)}>Answers</button>
                 </li>
                 <li>
                   <button onClick={handleReplay}>Replay</button>

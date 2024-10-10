@@ -40,7 +40,7 @@ const Random = () => {
       resetState(); // Reset states on new question load
     } catch (error) {
       console.error("Error fetching question:", error);
-      alert("Failed to load question. Please try again.");
+      console.log("Failed to load question. Please try again.");
     } finally {
       setLoading(false);
     }

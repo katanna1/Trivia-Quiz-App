@@ -51,6 +51,7 @@ const FetchQuestions = () => {
         throw new Error("No questions found in the API response");
       }
     } catch (error) {
+      // Instead of an alert, just log the error and set it for display
       setError(`Failed to fetch questions: ${error.message}`);
       console.error("Error fetching questions:", error);
     } finally {
@@ -65,16 +66,19 @@ const FetchQuestions = () => {
   return (
     <div>
       {loading && <p>Loading questions...</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>} {/* Display error if present */}
       {questions.length > 0 && (
         <ul>
           {questions.map((question, index) => (
             <li key={index}>
               <h3 dangerouslySetInnerHTML={{ __html: question.question }} />
               <ul>
-                {question.incorrect_answers.concat(question.correct_answer).map((answer, i) => (
-                  <li key={i} dangerouslySetInnerHTML={{ __html: answer }} />
-                ))}
+                {question.incorrect_answers
+                  .concat(question.correct_answer)
+                  .sort(() => Math.random() - 0.5) // Shuffle answers
+                  .map((answer, i) => (
+                    <li key={i} dangerouslySetInnerHTML={{ __html: answer }} />
+                  ))}
               </ul>
             </li>
           ))}
